@@ -3,7 +3,7 @@ import type { NextRequest } from "next/server";
 
 export async function GET(
   _req: NextRequest,
-  context: { params: { drawNo: string } }
+  context: any // 혹은 생략해도 됨
 ) {
   const { drawNo } = context.params;
 
