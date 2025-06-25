@@ -1,10 +1,13 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-export async function GET(
-  _req: NextRequest,
-  context: any // 혹은 생략해도 됨
-) {
+interface Context {
+  params: {
+    drawNo: string;
+  };
+}
+
+export async function GET(_req: NextRequest, context: Context) {
   const { drawNo } = context.params;
 
   if (!drawNo || isNaN(Number(drawNo))) {
@@ -16,7 +19,7 @@ export async function GET(
       `https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=${drawNo}`,
       {
         next: {
-          revalidate: 60 * 60, // 1시간 캐싱
+          revalidate: 60 * 60,
         },
       }
     );
