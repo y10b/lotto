@@ -1,14 +1,11 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-interface Context {
-  params: {
-    drawNo: string;
-  };
-}
-
-export async function GET(_req: NextRequest, context: Context) {
-  const { drawNo } = context.params;
+export async function GET(
+  _req: NextRequest,
+  { params }: { params: Promise<{ drawNo: string }> }
+) {
+  const { drawNo } = await params;
 
   if (!drawNo || isNaN(Number(drawNo))) {
     return NextResponse.json({ error: "유효하지 않은 회차" }, { status: 400 });
