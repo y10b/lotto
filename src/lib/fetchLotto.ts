@@ -42,6 +42,6 @@ export async function getFrequentNumbers(
   }
 
   return Object.entries(frequencyMap)
-    .filter(([_, count]) => count >= 3)
+    .filter(([, count]) => count >= 3)
     .map(([num]) => Number(num));
 }
